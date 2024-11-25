@@ -95,7 +95,11 @@ export default function WikipediaPhilosophyGame() {
                     selectedLanguage.code
                 );
 
-                console.log(previousStep, "=>", { title, section, nextLink, isRedirect, redirectTarget, redirectSection })
+                if (previousStep && previousStep?.title === redirectTarget) {
+                    break;
+                }
+
+                console.log(previousStep, "=>", { title: redirectTarget ? redirectTarget : title, section, nextLink, isRedirect, redirectTarget, redirectSection })
 
                 if (previousStep?.redirectTarget === title) {
                     setPath(prev => [...prev.slice(0, -1), { ...prev[prev.length - 1], nextLink: nextLink || undefined }]);
@@ -115,11 +119,12 @@ export default function WikipediaPhilosophyGame() {
             if (currentArticle.toLowerCase() === selectedLanguage.philosophyTitle.toLowerCase()) {
                 setPath(prev => [...prev, { title: selectedLanguage.philosophyTitle, isRedirect: false }]);
             } else {
-                const { title, isRedirect, redirectTarget } = await parseWikipediaArticle(
+                const { title, section, nextLink, isRedirect, redirectTarget, redirectSection } = await parseWikipediaArticle(
                     currentArticle,
                     selectedLanguage.code
                 );
-                setPath(prev => [...prev.map(step => ({ ...step, isLoopCulpit: step.title === title })), { title, isRedirect, redirectTarget: redirectTarget || undefined, isLoopCulpit: true }]);
+                
+                setPath(prev => [...prev.map(step => ({ ...step, isLoopCulpit: (((step.title === title) || (step.redirectTarget !== undefined &&(step.redirectTarget === title))) || (redirectTarget !== undefined && (step.title === redirectTarget || (step.redirectTarget !== undefined && step.redirectTarget === redirectTarget)))) })), { title, section, nextLink, isRedirect, redirectTarget: redirectTarget || undefined, redirectSection: redirectSection || undefined, isLoopCulpit: true }]);
                 setError('A loop was detected in the article chain.');
             }
         } catch (err) {

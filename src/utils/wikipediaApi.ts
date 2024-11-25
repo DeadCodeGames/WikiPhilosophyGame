@@ -159,8 +159,6 @@ function findFirstValidLink(html: string, sectionsToSkip: Set<number>): string |
     // Find all links in the modified paragraph
     const links = tempDiv.getElementsByTagName('a');
 
-    console.log(textWithoutParentheses, links)
-
     for (let j = 0; j < links.length; j++) {
       const link = links[j];
       const href = link.getAttribute('href');
