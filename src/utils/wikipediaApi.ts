@@ -89,6 +89,17 @@ function stripHtml(html: string): string {
   return tmp.textContent || tmp.innerText || '';
 }
 
+function removeItalicizedContent(html: string): string {
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = html;
+
+  // Remove all <i> and <em> elements
+  const italicElements = tempDiv.querySelectorAll('i, em');
+  italicElements.forEach(el => el.remove());
+
+  return tempDiv.innerHTML;
+}
+
 function removeParentheses(input: string): string {
   // Step 1: Handle <a href> attributes and temporarily replace them to avoid modification
   const hrefRegex = /<a\b[^>]*?href="[^"]*?"[^>]*?>/gi;
@@ -153,10 +164,10 @@ function findFirstValidLink(html: string, sectionsToSkip: Set<number>): string |
     }
 
     // Remove content within parentheses, but preserve href attributes
-    const textWithoutParentheses = removeParentheses(paragraph.innerHTML)
+    const cleanedText = removeItalicizedContent(removeParentheses(paragraph.innerHTML))
 
     const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = textWithoutParentheses;
+    tempDiv.innerHTML = cleanedText;
 
     // Find all links in the modified paragraph
     const links = tempDiv.getElementsByTagName('a');
