@@ -42,7 +42,8 @@ module.exports = {
         },
         fontFamily: {
           'sans': ['Noto Sans', 'Noto Sans JP', 'Noto Sans SC', 'Noto Sans TC', 'Noto Sans KR', ...defaultTheme.fontFamily.sans],
-          'wiki': ['Linux Libertine O', ...defaultTheme.fontFamily.serif]
+          'wiki': ['Linux Libertine O', ...defaultTheme.fontFamily.serif],
+          'mono': ['JetBrains Mono', ...defaultTheme.fontFamily.mono],
         },
         borderRadius: {
           lg: `var(--radius)`,

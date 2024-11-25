@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { GridBG, GlowFX } from '@/components/bg'
+import Footer from '@/components/ui/footer'
 import { parseWikipediaArticle } from '@/utils/wikipediaApi'
 import { ArrowRight, Globe, BookOpen, Sparkles, CircleArrowDown, CirclePause } from 'lucide-react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -271,6 +272,8 @@ export default function WikipediaPhilosophyGame() {
             >
                 {isUserScrolling ? <CircleArrowDown className="scale-150" /> : <CirclePause className="scale-150" />}
             </Button>
+
+            <Footer />
         </div>
     );
 }
