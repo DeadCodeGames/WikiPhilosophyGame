@@ -210,6 +210,7 @@ export default function WikipediaPhilosophyGame() {
                             <Button
                                 type="button"
                                 onClick={fetchRandomArticle}
+                                disabled={isLoading}
                                 className="bg-black hover:bg-[#0F0F0F] border-white/100 border-solid border-2 rounded-[8px] text-white"
                             >
                                 Surprise me!<Sparkles />
