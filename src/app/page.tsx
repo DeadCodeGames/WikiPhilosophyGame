@@ -7,7 +7,8 @@ import { GridBG, GlowFX } from '@/components/bg'
 import Footer from '@/components/ui/footer'
 import { parseWikipediaArticle } from '@/utils/wikipediaApi'
 import { ArrowRight, Globe, BookOpen, Sparkles, CircleArrowDown, CirclePause } from 'lucide-react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Trans, useTranslation } from 'react-i18next';
 
 interface PathStep {
     title: string;
@@ -51,6 +52,12 @@ export default function WikipediaPhilosophyGame() {
     const [playingLanguage, setPlayingLanguage] = useState<Language>(SUPPORTED_LANGUAGES[2])
     const pathEndRef = useRef<HTMLDivElement | null>(null);
     const [isUserScrolling, setIsUserScrolling] = useState(false);
+    const { t, i18n } = useTranslation();
+
+    const changeLang = (language: string) => {
+        i18n.changeLanguage(language);
+        console.log("changed language to ", language);
+    };
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
@@ -87,7 +94,7 @@ export default function WikipediaPhilosophyGame() {
 
             while (currentArticle.toLowerCase() !== selectedLanguage.philosophyTitle.toLowerCase() &&
                 (!visitedArticles.has(currentArticle) ||
-                (visitedArticles.has(currentArticle) && (previousStep?.redirectTarget === currentArticle)))) {
+                    (visitedArticles.has(currentArticle) && (previousStep?.redirectTarget === currentArticle)))) {
                 visitedArticles.add(currentArticle);
 
                 const { title, section, nextLink, isRedirect, redirectTarget, redirectSection } = await parseWikipediaArticle(
@@ -123,8 +130,8 @@ export default function WikipediaPhilosophyGame() {
                     currentArticle,
                     selectedLanguage.code
                 );
-                
-                setPath(prev => [...prev.map(step => ({ ...step, isLoopCulpit: (((step.title === title) || (step.redirectTarget !== undefined &&(step.redirectTarget === title))) || (redirectTarget !== undefined && (step.title === redirectTarget || (step.redirectTarget !== undefined && step.redirectTarget === redirectTarget)))) })), { title, section, nextLink, isRedirect, redirectTarget: redirectTarget || undefined, redirectSection: redirectSection || undefined, isLoopCulpit: true }]);
+
+                setPath(prev => [...prev.map(step => ({ ...step, isLoopCulpit: (((step.title === title) || (step.redirectTarget !== undefined && (step.redirectTarget === title))) || (redirectTarget !== undefined && (step.title === redirectTarget || (step.redirectTarget !== undefined && step.redirectTarget === redirectTarget)))) })), { title, section, nextLink, isRedirect, redirectTarget: redirectTarget || undefined, redirectSection: redirectSection || undefined, isLoopCulpit: true }]);
                 setError('A loop was detected in the article chain.');
             }
         } catch (err) {
@@ -174,14 +181,14 @@ export default function WikipediaPhilosophyGame() {
                             <BookOpen className="w-12 h-12 text-white translate-y-0.5" />
                         </div>
                         <h1 className="text-5xl font-bold mb-3 text-white tracking-tight font-wiki">
-                            Wikipedia Philosophy Game
+                            {t('title')}
                         </h1>
                         <p className="text-gray-400 max-w-2xl mx-auto">
-                            Start with any article and follow the first link to see if you can reach Philosophy!
+                            {t('subtitle')}
                         </p>
                     </div>
 
-                    <form onSubmit={startArticle === 'Special:Random' ? (e) => {e.preventDefault(); fetchRandomArticle()} : startGame} className="mb-8 animate-slide-up">
+                    <form onSubmit={startArticle === 'Special:Random' ? (e) => { e.preventDefault(); fetchRandomArticle() } : startGame} className="mb-8 animate-slide-up">
                         <div className="flex gap-3">
                             <Select
                                 value={selectedLanguage.code}
@@ -213,14 +220,14 @@ export default function WikipediaPhilosophyGame() {
                                 disabled={isLoading}
                                 className="bg-black hover:bg-[#0F0F0F] border-white/100 border-solid border-2 rounded-[8px] text-white"
                             >
-                                Surprise me!<Sparkles />
+                                {t('randomButton')}<Sparkles />
                             </Button>
                             <Button
                                 type="submit"
                                 disabled={isLoading}
                                 className="bg-white text-black hover:bg-gray-200 transition-colors px-6 rounded-[8px]"
                             >
-                                {isLoading ? 'Searching...' : 'Start'}
+                                {isLoading ? t('searchInProgress') : t('searchStart')}
                             </Button>
                         </div>
                     </form>
@@ -228,9 +235,9 @@ export default function WikipediaPhilosophyGame() {
                     {error && (
                         <Card className="mb-8 bg-red-500/10 border-red-500/20 text-white animate-fade-in relative grain">
                             <CardHeader>
-                                <CardTitle className="text-red-400">{(error === ("A loop was detected in the article chain.") || error.startsWith("No valid links found in ")) ? "Game Over" : "Error"}</CardTitle>
+                                <CardTitle className="text-red-400">{(error === ("A loop was detected in the article chain.") || error.startsWith("No valid links found in ")) ? t('gameOver') : t('error')}</CardTitle>
                             </CardHeader>
-                            <CardContent>{error}</CardContent>
+                            <CardContent>{(error === ("A loop was detected in the article chain.") ? t("loopDetected") : error.startsWith("No valid links found in ") ? t("noLinks") : error)}</CardContent>
                         </Card>
                     )}
 
@@ -239,7 +246,11 @@ export default function WikipediaPhilosophyGame() {
                             <CardHeader>
                                 <CardTitle className="text-white flex items-center gap-2">
                                     <Sparkles className="w-5 h-5" />
-                                    Path to <span className={`${path[path.length - 1].title.toLowerCase() === playingLanguage.philosophyTitle.toLowerCase() ? "text-green-600" : path[path.length - 1].isLoopCulpit ? "text-red-600" : "text-white"} transition-colors`}>{playingLanguage.philosophyTitle}</span>
+                                    <span className="flex items-center gap-1">
+                                        <Trans i18nKey="pathToPhilosophy" values={{ philosophyTitle: playingLanguage.philosophyTitle }} className='gap-1'>
+                                            <span className={`${path[path.length - 1].title.toLowerCase() === playingLanguage.philosophyTitle.toLowerCase() ? "text-green-600" : path[path.length - 1].isLoopCulpit ? "text-red-600" : "text-white"} transition-colors`} ></span>
+                                        </Trans>
+                                    </span>
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
@@ -252,10 +263,24 @@ export default function WikipediaPhilosophyGame() {
                                                 </a>
                                             </span>
                                             {(step.isRedirect || step.section || step.redirectSection) && (
-                                                <span className={`text-xs ${step.title.toLowerCase() === playingLanguage.philosophyTitle.toLowerCase() ? "text-green-900" :step.isLoopCulpit ? "text-red-900" : "text-gray-400"} ml-1 translate-y-0.5`}>
-                                                    (<a href={`https://${playingLanguage.code}.wikipedia.org/wiki/${encodeURIComponent(step.title)}`} target="_blank" rel="noopener noreferrer">
-                                                        {[step.redirectSection ? ("section #" + step.redirectSection) : null, step.title ? ("redirected from " + step.title) : null, step.section ? ("section #" + step.section) : null].filter(Boolean).join(", ")}
-                                                    </a>)
+                                                <span className={`text-xs ${step.title.toLowerCase() === playingLanguage.philosophyTitle.toLowerCase() ? "text-green-900" : step.isLoopCulpit ? "text-red-900" : "text-gray-400"} ml-1 translate-y-0.5`}>
+                                                    ({step.redirectSection && (<Trans
+                                                        i18nKey="sectionMarker"
+                                                        values={{ section: step.redirectSection }}
+                                                    ><a href={`https://${playingLanguage.code}.wikipedia.org/wiki/${encodeURIComponent(step.redirectTarget ?? step.title)}#${encodeURIComponent(step.redirectSection)}`} target="_blank" rel="noopener noreferrer" />
+                                                    </Trans>)}
+                                                    {(step.redirectSection && (step.title || step.section)) && t('contextSeparator')}
+                                                    {step.title && (<Trans
+                                                        i18nKey="redirectedMarker"
+                                                        values={{ title: step.title }}
+                                                    ><a href={`https://${playingLanguage.code}.wikipedia.org/wiki/${encodeURIComponent(step.title)}`} target="_blank" rel="noopener noreferrer" />
+                                                    </Trans>)}
+                                                    {((step.redirectSection || step.title) && step.section) && t('contextSeparator')}
+                                                    {step.section && (<Trans
+                                                        i18nKey="sectionMarker"
+                                                        values={{ section: step.section }}
+                                                    ><a href={`https://${playingLanguage.code}.wikipedia.org/wiki/${encodeURIComponent(step.title)}#${encodeURIComponent(step.section)}`} target="_blank" rel="noopener noreferrer" />
+                                                    </Trans>)})
                                                 </span>
                                             )}
                                             {index < path.length - 1 && (

@@ -17,9 +17,11 @@ fs.readFile(footerPath, 'utf8', (err, data) => {
 
     // Replace the NODE_ENV check with the new string
     const updatedData = data.replace(
-        /{process.env.NODE_ENV === "development" \? "Development Mode" : "Production Build"}/,
-        `${(commitLink && shortSHA) ? `Deployed from <a href="${commitLink}">${shortSHA}</a>` : 'Deployed via GitHub Pages'}`
+        '{t(process.env.NODE_ENV === "development" ? "footer.devmode" : "footer.prodmode")}',
+        `${(commitLink && shortSHA) ? `<Trans i18nKey="footer.deployedSHA" values={{ sha: "${shortSHA}" }}><a href="${commitLink}"></a></Trans>` : "{t('footer.deployed')}"}`
     );
+
+    console.log(updatedData)
 
     // Write the updated content back to footer.tsx
     fs.writeFile(footerPath, updatedData, 'utf8', (err) => {
