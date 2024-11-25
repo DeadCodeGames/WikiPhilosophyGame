@@ -1,0 +1,19 @@
+{
+    "title": "Wikipedia Philosophy Game",
+    "subtitle": "Start with any article and follow the first link to see if you can reach Philosophy!",
+    "randomButton": "Surprise me!",
+    "searchStart": "Start",
+    "searchInProgress": "Searching...",
+    "error": "Error",
+    "gameOver": "Game Over",
+    "loopDetected": "A loop was detected in the article chain.",
+    "noLinks": "No valid links found in \"{{title}}\".",
+    "pathToPhilosophy": "Path to <0>{{philosophyTitle}}</0>",
+    "sectionMarker": "<0>section #{{section}}</0>",
+    "redirectedMarker": "<0>redirected from {{step.title}}</0>",
+    "contextSeparator": ", ",
+    "footer.devmode": "Development Mode",
+    "footer.prodmode": "Production Build",
+    "footer.deployed": "Deployed via GitHub Pages",
+    "footer.deployedSHA": "Deployed from <0>{{sha}}</0>"
+}

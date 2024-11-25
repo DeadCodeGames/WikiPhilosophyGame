@@ -1,0 +1,20 @@
+{
+    "title": "Wikipédia: Hra Filozofie",
+    "subtitle": "Začnite s akýmkoľvek článkom a sledujte prvý odkaz v článku. Dostanete sa k filozofii?",
+    "randomButton": "Náhodný článok",
+    "searchStart": "Štart",
+    "searchInProgress": "Vyhľadávanie...",
+    "error": "Nastala neočakávaná chyba.",
+    "gameOver": "Prehra!",
+    "loopDetected": "Reťazec článkov sa dostal do cyklu.",
+    "noLinks": "V článku \"{{title}}\" neboli nájdené žiadne platné odkazy.",
+    "pathToPhilosophy": "Cesta k článku <0>{{philosophyTitle}}</0>",
+    "sectionMarker": "<0>sekcia #{{section}}</0>",
+    "redirectedMarker": "<0>presmerované z {{title}}</0>",
+    "contextSeparator": ", ",
+    "footer.devmode": "Vývojový Režim",
+    "footer.prodmode": "Produkčná Zostava",
+    "footer.deployed": "Zverejnené cez GitHub Pages",
+    "footer.deployedSHA": "Zverejnené z commitu <0>{{sha}}</0>"
+  }
+  
