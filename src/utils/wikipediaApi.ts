@@ -48,6 +48,8 @@ export async function parseWikipediaArticle(
       .filter((section: any) => {
         const sectionTitle = section.line.toLowerCase();
         const skipPatterns = {
+          sk: ['o iných významoch', 'iné projekty', 'pozri aj'],
+          cz: ['další významy', 'externí odkazy', 'související články'],
           en: ['not to be confused with', 'disambiguation', 'other uses', 'see also'],
           jp: ['曖昧さ回避', '関連項目', 'その他の用法'],
           zh: ['消歧义', '相关条目', '其他用途'],
@@ -119,7 +121,7 @@ function findFirstValidLink(html: string, sectionsToSkip: Set<number>): string |
 
   // Remove elements with specified classes
   const classesToRemove = ['hatnote', 'navigation-not-searchable', 'ambox', 'box-Multiple_issues', 'metadata', 'mw-heading', 'side-box', 'pathnavbox', 'infobox', 'floatright'];
-  const IDsToRemove = ['disambigbox'];
+  const IDsToRemove = ['disambigbox', 'Vorlage_BK'];
 
   classesToRemove.forEach(className => {
     const elements = doc.getElementsByClassName(className);
