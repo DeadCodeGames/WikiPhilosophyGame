@@ -10,7 +10,7 @@
     "noLinks": "No valid links found in \"{{title}}\".",
     "pathToPhilosophy": "Path to <0>{{philosophyTitle}}</0>",
     "sectionMarker": "<0>section #{{section}}</0>",
-    "redirectedMarker": "<0>redirected from {{step.title}}</0>",
+    "redirectedMarker": "<0>redirected from {{title}}</0>",
     "contextSeparator": ", ",
     "footer.devmode": "Development Mode",
     "footer.prodmode": "Production Build",
