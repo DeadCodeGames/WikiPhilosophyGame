@@ -341,7 +341,7 @@ export default function WikipediaPhilosophyGame() {
             {/* Toggle Scroll Button */}
             <Button
                 onClick={toggleScroll}
-                className="fixed bottom-4 right-4 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-700 dark:hover:bg-gray-200 transition-colors p-0 rounded-full aspect-square scale-4"
+                className="fixed bottom-4 right-4 z-10 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-700 dark:hover:bg-gray-200 transition-colors p-0 rounded-full aspect-square scale-100 hover:scale-125 transition-transform"
             >
                 {isUserScrolling ? <CircleArrowDown className="scale-150" /> : <CirclePause className="scale-150" />}
             </Button>
