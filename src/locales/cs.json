@@ -1,0 +1,20 @@
+{
+    "title": "Wikipedie: Hra Filozofie",
+    "subtitle": "Začni vložením názvu jakéhokoliv článku, následuj první odkaz a zjisti zda můžeš dosáhnout Filozofie!",
+    "randomButton": "Překvap mě!",
+    "searchStart": "Start",
+    "searchInProgress": "Vyhledávám…",
+    "error": "Chyba",
+    "gameOver": "Konec Hry!",
+    "loopDetected": "V řetězci článků byla nalezena smyčka.",
+    "noLinks": "V „{{title}}“ nebyly nalezeny žádné platné odkazy.",
+    "pathToPhilosophy": "Cesta ke článku: <0>{{philosophyTitle}}</0>",
+    "sectionMarker": "<0>sekce #{{section}}</0>",
+    "redirectedMarker": "<0>přesměrováno z {{title}}</0>",
+    "contextSeparator": ", ",
+    "footer.devmode": "Vývojářský Režim",
+    "footer.prodmode": "Produkční Sestava",
+    "footer.deployed": "Publikováno přes GitHub Pages",
+    "footer.deployedSHA": "Publikováno z commitu <0>{{sha}}</0>",
+    "langEmoji": "<0>🇨🇿</0>"
+}

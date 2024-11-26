@@ -59,9 +59,10 @@ export default function WikipediaPhilosophyGame() {
     const [iLang, setILang] = useState(0);
     const [currentLang, setCurrentLang] = useState(i18n.language);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const savedLang = localStorage.getItem('language') || 'en';
         i18n.changeLanguage(savedLang);
+        setCurrentLang(savedLang);
     }, []);
 
     const changeLang = (lang: string) => {
@@ -259,7 +260,7 @@ export default function WikipediaPhilosophyGame() {
                                 type="button"
                                 onClick={fetchRandomArticle}
                                 disabled={isLoading}
-                                className="bk-white dark:bg-black hover:bg-[#F0F0F0] dark:hover:bg-[#0F0F0F] border-black/100 dark:border-white/100 border-solid border-2 rounded-[8px] text-black dark:text-white"
+                                className="bg-white dark:bg-black hover:bg-[#F0F0F0] dark:hover:bg-[#0F0F0F] border-black/100 dark:border-white/100 border-solid border-2 rounded-[8px] text-black dark:text-white"
                             >
                                 {t('randomButton')}<Sparkles />
                             </Button>
