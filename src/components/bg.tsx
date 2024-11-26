@@ -8,7 +8,7 @@ function GridBG() {
 
 function GlowFX() {
     return (
-        <div className="fixed inset-0 overflow-hidden pointer-events-none animate-spin">
+        <div className="fixed inset-0 overflow-hidden pointer-events-none animate-spin will-change-transform">
             <div className="absolute top-1/2 left-[12.5%] w-[min(25vw,25vh)] h-[min(25vw,25vh)] bg-black/20 dark:bg-white/20 rounded-full mix-blend-darken dark:mix-blend-lighten filter blur-[min(5vw,5vh)] opacity-50 animate-pulse transition-colors"></div>
             <div className="absolute bottom-1/2 right-[12.5%] w-[min(25vw,25vh)] h-[min(25vw,25vh)] bg-black/20 dark:bg-white/20 rounded-full mix-blend-darken dark:mix-blend-lighten filter blur-[min(5vw,5vh)] opacity-50 animate-pulse transition-colors"></div>
         </div>
