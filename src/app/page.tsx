@@ -42,7 +42,7 @@ const SUPPORTED_LANGUAGES: Language[] = [
     { code: 'ru', name: 'Русский', philosophyTitle: 'Философия', placeholder: "Введите название статьи в Русском Википедии" },
 ];
 
-const UI_LANGUAGES = ['en', 'sk'];
+const UI_LANGUAGES = ['en', 'sk', 'cs'];
 
 export default function WikipediaPhilosophyGame() {
     const location = useLocation();
