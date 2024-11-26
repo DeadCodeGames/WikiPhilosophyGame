@@ -219,7 +219,7 @@ export default function WikipediaPhilosophyGame() {
                                 <BookOpen className="size-16 text-black dark:text-white translate-y-0.5" />
                             </div>
                             <div className="block p-3 bg-black/10 dark:bg-white/5 backdrop-blur-sm rounded-full mb-4 hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-300 -ml-8 scale-75 z-0 group-hover/icons:ml-0 group-hover/icons:scale-100 opacity-75 group-hover/icons:opacity-100">
-                                {document.documentElement.classList.contains('dark') ? <Sun className="size-12 text-black dark:text-white" onClick={toggleDarkMode} /> : <Moon className="size-12 text-black dark:text-white" onClick={toggleDarkMode} />}
+                                {darkMode ? <Sun className="size-12 text-black dark:text-white" onClick={toggleDarkMode} /> : <Moon className="size-12 text-black dark:text-white" onClick={toggleDarkMode} />}
                             </div>
                         </div>
                         <h1 className="text-5xl font-bold mb-3 text-black dark:text-white tracking-tight font-wiki">
