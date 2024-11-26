@@ -242,7 +242,7 @@ export default function WikipediaPhilosophyGame() {
                                 </SelectTrigger>
                                 <SelectContent className="bg-white/95 border-black/10 text-black dark:bg-black/95 dark:border-white/10 dark:text-white rounded-[8px]">
                                     {SUPPORTED_LANGUAGES.map((language) => (
-                                        <SelectItem key={language.code} value={language.code} className="hover:bg-dark/50 dark:hover:bg-white/50 cursor-pointer">
+                                        <SelectItem key={language.code} value={language.code} className="hover:bg-black/50 dark:hover:bg-white/50 cursor-pointer rounded-[8px] transition-colors">
                                             {language.name}
                                         </SelectItem>
                                     ))}
