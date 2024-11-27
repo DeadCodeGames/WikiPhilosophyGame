@@ -288,8 +288,8 @@ export default function WikipediaPhilosophyGame() {
                             <CardHeader>
                                 <CardTitle className="text-black dark:text-white flex items-center gap-2">
                                     <Sparkles className="w-5 h-5" />
-                                    <span className="flex items-center gap-1">
-                                        <Trans i18nKey="pathToPhilosophy" values={{ philosophyTitle: playingLanguage.philosophyTitle }} className='gap-1'>
+                                    <span className="flex items-center whitespace-break-spaces">
+                                        <Trans i18nKey="pathToPhilosophy" values={{ philosophyTitle: playingLanguage.philosophyTitle }} className=''>
                                             <span className={`${path[path.length - 1].title.toLowerCase() === playingLanguage.philosophyTitle.toLowerCase() ? "text-green-700 dark:text-green-500" : path[path.length - 1].isLoopCulpit ? "text-red-700 dark:text-red-500" : "text-black dark:text-white"} transition-colors`} ></span>
                                         </Trans>
                                     </span>
