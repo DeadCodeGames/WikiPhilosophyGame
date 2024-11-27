@@ -21,8 +21,6 @@ fs.readFile(footerPath, 'utf8', (err, data) => {
         `${(commitLink && shortSHA) ? `<Trans i18nKey="footer.deployedSHA" values={{ sha: "${shortSHA}" }}><a href="${commitLink}"></a></Trans>` : "{t('footer.deployed')}"}`
     );
 
-    console.log(updatedData)
-
     // Write the updated content back to footer.tsx
     fs.writeFile(footerPath, updatedData, 'utf8', (err) => {
         if (err) {
