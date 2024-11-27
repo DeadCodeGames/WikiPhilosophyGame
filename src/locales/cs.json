@@ -8,7 +8,7 @@
     "gameOver": "Konec Hry!",
     "loopDetected": "V řetězci článků byla nalezena smyčka.",
     "noLinks": "V „{{title}}“ nebyly nalezeny žádné platné odkazy.",
-    "pathToPhilosophy": "Cesta ke článku: <0>{{philosophyTitle}}</0>",
+    "pathToPhilosophy": "Cesta ke článku <0>{{philosophyTitle}}</0>",
     "sectionMarker": "<0>sekce #{{section}}</0>",
     "redirectedMarker": "<0>přesměrováno z {{title}}</0>",
     "contextSeparator": ", ",
