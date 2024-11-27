@@ -178,8 +178,7 @@ function findFirstValidLink(html: string, sectionsToSkip: Set<number>): string |
 
       // Check if the link is valid
       if (href && href.startsWith('/wiki/') && 
-          !href.includes(':') && 
-          !href.includes('#') && 
+          !href.includes(':') &&
           !link.classList.contains('new')) {
         return decodeURIComponent(href.split('/wiki/')[1]).replace(/_/g, ' ');
       }

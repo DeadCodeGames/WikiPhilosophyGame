@@ -123,8 +123,6 @@ export default function WikipediaPhilosophyGame() {
                     break;
                 }
 
-                console.log(previousStep, "=>", { title: redirectTarget ? redirectTarget : title, section, nextLink, isRedirect, redirectTarget, redirectSection })
-
                 if (previousStep?.redirectTarget === title) {
                     setPath(prev => [...prev.slice(0, -1), { ...prev[prev.length - 1], nextLink: nextLink || undefined }]);
                 } else {
