@@ -19,7 +19,7 @@ jobs:
           node-version: "18"
           
       - name: Install dependencies
-        run: npm i
+        run: npm i --force
     
       - name: Build React app
         run: CI=true npm run build
@@ -28,16 +28,3 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./build
-    
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-        with: 
-          preview: true
