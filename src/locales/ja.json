@@ -1,0 +1,20 @@
+{
+    "title": "ウィキペディア「哲学」ゲーム",
+    "subtitle": "任意の記事から始めて、最初のリンクを辿ってみましょう。哲学にたどり着けるでしょうか？",
+    "randomButton": "サプライズして！",
+    "searchStart": "スタート",
+    "searchInProgress": "検索中…",
+    "error": "エラー",
+    "gameOver": "ゲーム・オーバー！",
+    "loopDetected": "記事のチェーン内にループが検出されました。",
+    "noLinks": "「{{title}}」 内に有効なリンクが見つかりませんでした。",
+    "pathToPhilosophy": "<0>{{philosophyTitle}}</0>への径路",
+    "sectionMarker": "<0>セクション #{{section}}</0>",
+    "redirectedMarker": "<0>{{title}}からリダイレクトされました</0>",
+    "contextSeparator": "、",
+    "footer.devmode": "デヴ・モード",
+    "footer.prodmode": "プロダクション・ビルド",
+    "footer.deployed": "GitHub Pages経由でデプロイしました",
+    "footer.deployedSHA": "<0>コミット{{sha}}</0>からデプロイされました",
+    "langEmoji": "<0>🇯🇵</0>"
+}
