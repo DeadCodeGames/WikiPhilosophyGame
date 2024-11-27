@@ -2,10 +2,16 @@ name: Update i18n Config
 
 on:
   push:
-    branches: ['l10n_crowdin_translations']
+    branches:
+      - l10n_crowdin_translations
+  pull_request:
+    types: [opened, synchronize, edited]
+  repository_dispatch:
+    types: [l10n_crowdin_translations_branch_created]
 
 jobs:
   update-i18n:
+    if: github.head_ref && github.head_ref == 'l10n_crowdin_translations'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
