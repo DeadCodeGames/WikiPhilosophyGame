@@ -309,13 +309,13 @@ export default function WikipediaPhilosophyGame() {
                                                         values={{ section: step.redirectSection }}
                                                     ><a href={`https://${playingLanguage.code}.wikipedia.org/wiki/${encodeURIComponent(step.redirectTarget ?? step.title)}#${encodeURIComponent(step.redirectSection)}`} target="_blank" rel="noopener noreferrer" />
                                                     </Trans>)}
-                                                    {(step.redirectSection && (step.title || step.section)) && t('contextSeparator')}
-                                                    {step.title && (<Trans
+                                                    {(step.redirectSection && ((step.isRedirect && step.title) || step.section)) && t('contextSeparator')}
+                                                    {(step.isRedirect && step.title) && (<Trans
                                                         i18nKey="redirectedMarker"
                                                         values={{ title: step.title }}
                                                     ><a href={`https://${playingLanguage.code}.wikipedia.org/wiki/${encodeURIComponent(step.title)}`} target="_blank" rel="noopener noreferrer" />
                                                     </Trans>)}
-                                                    {((step.redirectSection || step.title) && step.section) && t('contextSeparator')}
+                                                    {((step.redirectSection || (step.isRedirect && step.title)) && step.section) && t('contextSeparator')}
                                                     {step.section && (<Trans
                                                         i18nKey="sectionMarker"
                                                         values={{ section: step.section }}
