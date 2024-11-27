@@ -72,8 +72,8 @@ export async function parseWikipediaArticle(
   const nextLink = isRedirect ? redirectTarget : findFirstValidLink(data.parse.text['*'], sectionsToSkip);
 
   return {
-    title: decodeURIComponent(title).split("#")[0],
-    section: decodeURIComponent(title).split("#")[1] || undefined,
+    title: decodeURIComponent(title).replace(/_/g, ' ').split("#")[0],
+    section: decodeURIComponent(title).replace(/_/g, ' ').split("#")[1] || undefined,
     extract,
     nextLink,
     isRedirect,
