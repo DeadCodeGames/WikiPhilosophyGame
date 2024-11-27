@@ -79,3 +79,48 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Relaxed Typing Mono JP';
+    src: url('RelaxedTypingMonoJP-Light.woff2') format('woff2'),
+        url('RelaxedTypingMonoJP-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Relaxed Typing Mono JP';
+    src: url('RelaxedTypingMonoJP-Bold.woff2') format('woff2'),
+        url('RelaxedTypingMonoJP-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Relaxed Typing Mono JP';
+    src: url('RelaxedTypingMonoJP-Black.woff2') format('woff2'),
+        url('RelaxedTypingMonoJP-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Relaxed Typing Mono JP';
+    src: url('RelaxedTypingMonoJP-Medium.woff2') format('woff2'),
+        url('RelaxedTypingMonoJP-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Relaxed Typing Mono JP';
+    src: url('RelaxedTypingMonoJP-Regular.woff2') format('woff2'),
+        url('RelaxedTypingMonoJP-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
