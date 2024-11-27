@@ -38,11 +38,18 @@ jobs:
 
           # Visit https://crowdin.com/settings#api-key to create this token
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+      - name: Check for l10n_crowdin_translations branch
+        run: |
+          if git branch --exists my-new-branch; then
+            echo "BRANCH_EXISTS=true" >> $GITHUB_ENV
+          else
+            echo "BRANCH_EXISTS=false" >> $GITHUB_ENV
+          fi
 
   update-i18n:
     needs: synchronize-with-crowdin
     runs-on: ubuntu-latest
-    if: needs.synchronize-with-crowdin.outputs.pull_request_url != ''
+    if: ${{ env.BRANCH_EXISTS == 'true' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
