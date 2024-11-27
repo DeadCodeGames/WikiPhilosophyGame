@@ -209,8 +209,8 @@ export default function WikipediaPhilosophyGame() {
             <div className="container mx-auto p-4 relative self-center">
                 <div className="max-w-4xl mx-auto pt-12 pb-8">
                     <div className="text-center mb-12 animate-fade-in flex flex-col items-center">
-                        <div className='flex flex-row gap-0 hover:gap-5 justify-center align-middle items-center group/icons transition-[gap] duration-300 w-fit'>
-                            <div className="block p-3 bg-black/10 dark:bg-white/5 backdrop-blur-sm rounded-full mb-4 hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-300 -mr-8 scale-75 z-0 group-hover/icons:mr-0 group-hover/icons:scale-100 opacity-75 group-hover/icons:opacity-100" onClick={cycleUILang}>
+                        <div className='flex flex-row gap-0 hover:gap-5 hoverNone:gap-5 justify-center align-middle items-center group/icons transition-[gap] duration-300 w-fit'>
+                            <div className="block p-3 bg-black/10 dark:bg-white/5 backdrop-blur-sm rounded-full mb-4 hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-300 -mr-8 scale-75 z-0 group-hover/icons:mr-0 group-hover/icons:scale-100 opacity-75 group-hover/icons:opacity-100 hoverNone:mr-0 hoverNone:scale-100" onClick={cycleUILang}>
                                 <Trans i18nKey="langEmoji">
                                     <Twemoji key={currentLang} options={{ className: 'twemoji size-12' }}></Twemoji>
                                 </Trans>
@@ -218,7 +218,7 @@ export default function WikipediaPhilosophyGame() {
                             <div className="block p-5 bg-black/10 dark:bg-white/5 backdrop-blur-sm rounded-full mb-4 transition-all duration-300 z-10">
                                 <BookOpen className="size-16 text-black dark:text-white translate-y-0.5" />
                             </div>
-                            <div className="block p-3 bg-black/10 dark:bg-white/5 backdrop-blur-sm rounded-full mb-4 hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-300 -ml-8 scale-75 z-0 group-hover/icons:ml-0 group-hover/icons:scale-100 opacity-75 group-hover/icons:opacity-100">
+                            <div className="block p-3 bg-black/10 dark:bg-white/5 backdrop-blur-sm rounded-full mb-4 hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-300 -ml-8 scale-75 z-0 group-hover/icons:ml-0 group-hover/icons:scale-100 opacity-75 group-hover/icons:opacity-100 hoverNone:ml-0 hoverNone:scale-100">
                                 {darkMode ? <Sun className="size-12 text-black dark:text-white" onClick={toggleDarkMode} /> : <Moon className="size-12 text-black dark:text-white" onClick={toggleDarkMode} />}
                             </div>
                         </div>
