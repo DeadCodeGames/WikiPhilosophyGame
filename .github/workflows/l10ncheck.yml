@@ -1,0 +1,33 @@
+name: Update i18n Config
+
+on:
+  push:
+    branches:
+      - l10n_crowdin_translations
+
+jobs:
+  update-i18n:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Update i18n.ts
+        run: node update-i18n.js
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          git add src/locales/i18n.ts
+          git add src/app/page.tsx
+          git commit -m "Update i18n.ts with new languages"
+          git push
