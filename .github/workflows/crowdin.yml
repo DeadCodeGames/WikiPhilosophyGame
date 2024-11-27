@@ -42,6 +42,7 @@ jobs:
   update-i18n:
     needs: synchronize-with-crowdin
     runs-on: ubuntu-latest
+    if: needs.synchronize-with-crowdin.outputs.pull_request_url != ''
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
