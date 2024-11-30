@@ -234,8 +234,8 @@ export default function WikipediaPhilosophyGame() {
                                 value={selectedLanguage.code}
                                 onValueChange={handleLanguageChange}
                             >
-                                <SelectTrigger className="w-[180px] bg-black/5 dark:bg-white/5 backdrop-blur-sm border-black/10 dark:border-white/10 text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/10 transition-colors rounded-[8px] grain">
-                                    <Globe className="w-4 h-4 mr-2" />
+                                <SelectTrigger className="bg-black/5 dark:bg-white/5 backdrop-blur-sm border-black/10 dark:border-white/10 text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/10 transition-colors rounded-[8px] grain before:rounded-[8px] gap-1.5 w-auto">
+                                    <Globe className="w-4 h-4 mr-0.5" />
                                     <SelectValue placeholder="Select language" />
                                 </SelectTrigger>
                                 <SelectContent className="bg-white/95 border-black/10 text-black dark:bg-black/95 dark:border-white/10 dark:text-white rounded-[8px]">
@@ -252,7 +252,7 @@ export default function WikipediaPhilosophyGame() {
                                 onChange={(e) => setStartArticle(e.target.value)}
                                 placeholder={selectedLanguage.placeholder}
                                 required
-                                className="flex-grow bg-black/5 dark:bg-white/5 backdrop-blur-sm border-black/10 text-black placeholder:text-gray-400 focus:border-black/20 hover:bg-black/10 dark:border-white/10 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-white/20 dark:hover:bg-white/10 transition-colors rounded-[8px] grain"
+                                className="flex-grow bg-black/5 dark:bg-white/5 backdrop-blur-sm border-black/10 text-black placeholder:text-gray-400 focus:border-black/20 hover:bg-black/10 dark:border-white/10 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-white/20 dark:hover:bg-white/10 transition-colors rounded-[8px] grain before:rounded-[8px]"
                             />
                             <Button
                                 type="button"
@@ -273,7 +273,7 @@ export default function WikipediaPhilosophyGame() {
                     </form>
 
                     {error && (
-                        <Card className="mb-8 bg-red-400/10 dark:bg-red-500/10 border-red-400/20 dark:border-red-500/20 text-black dark:text-white animate-fade-in relative grain">
+                        <Card className="mb-8 bg-red-400/10 dark:bg-red-500/10 border-red-400/20 dark:border-red-500/20 text-black dark:text-white animate-fade-in relative grain before:rounded-xl">
                             <CardHeader>
                                 <CardTitle className="text-red-700 dark:text-red-400">{(error === ("A loop was detected in the article chain.") || error.startsWith("No valid links found in ")) ? t('gameOver') : t('error')}</CardTitle>
                             </CardHeader>
@@ -282,7 +282,7 @@ export default function WikipediaPhilosophyGame() {
                     )}
 
                     {path.length > 0 && (
-                        <Card className="bg-black/5 dark:bg-white/5 backdrop-blur-sm border-dark/10 dark:border-white/10 animate-slide-up relative grain">
+                        <Card className="bg-black/5 dark:bg-white/5 backdrop-blur-sm border-dark/10 dark:border-white/10 animate-slide-up relative grain before:rounded-xl">
                             <CardHeader>
                                 <CardTitle className="text-black dark:text-white flex items-center gap-2">
                                     <Sparkles className="w-5 h-5" />
