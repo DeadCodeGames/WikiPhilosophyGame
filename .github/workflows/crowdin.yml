@@ -41,12 +41,10 @@ jobs:
       - name: Check for l10n_crowdin_translations branch
         id: check_branch
         run: |
-          if git branch --exists my-new-branch; then
+          if git ls-remote --exit-code origin refs/heads/l10n_crowdin_translations; then
             echo "BRANCH_EXISTS=true" >> $GITHUB_ENV
-            echo "::set-output name=branch_exists::true"
           else
             echo "BRANCH_EXISTS=false" >> $GITHUB_ENV
-            echo "::set-output name=branch_exists::false"
           fi
 
   update-i18n:
