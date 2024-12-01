@@ -204,7 +204,7 @@ export default function WikipediaPhilosophyGame() {
             <GridBG />
             <GlowFX />
 
-            <div className="container mx-auto p-4 relative self-center">
+            <div className="container mx-auto p-4 mobileWrap:p-8 relative self-center">
                 <div className="max-w-4xl mx-auto pt-12 pb-8">
                     <div className="text-center mb-12 animate-fade-in flex flex-col items-center">
                         <div className='flex flex-row gap-0 hover:gap-5 hoverNone:gap-5 justify-center align-middle items-center group/icons transition-[gap] duration-300 w-fit'>
@@ -229,46 +229,50 @@ export default function WikipediaPhilosophyGame() {
                     </div>
 
                     <form onSubmit={startArticle === 'Special:Random' ? (e) => { e.preventDefault(); fetchRandomArticle() } : startGame} className="mb-8 animate-slide-up">
-                        <div className="flex gap-3">
-                            <Select
-                                value={selectedLanguage.code}
-                                onValueChange={handleLanguageChange}
-                            >
-                                <SelectTrigger className="bg-black/5 dark:bg-white/5 backdrop-blur-sm border-black/10 dark:border-white/10 text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/10 transition-colors rounded-[8px] grain before:rounded-[8px] gap-1.5 w-auto">
-                                    <Globe className="w-4 h-4 mr-0.5" />
-                                    <SelectValue placeholder="Select language" />
-                                </SelectTrigger>
-                                <SelectContent className="bg-white/95 border-black/10 text-black dark:bg-black/95 dark:border-white/10 dark:text-white rounded-[8px]">
-                                    {SUPPORTED_LANGUAGES.map((language) => (
-                                        <SelectItem key={language.code} value={language.code} className="hover:bg-black/50 dark:hover:bg-white/50 cursor-pointer rounded-[8px] transition-colors">
-                                            {language.name}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            <Input
-                                type="text"
-                                value={startArticle}
-                                onChange={(e) => setStartArticle(e.target.value)}
-                                placeholder={selectedLanguage.placeholder}
-                                required
-                                className="flex-grow bg-black/5 dark:bg-white/5 backdrop-blur-sm border-black/10 text-black placeholder:text-gray-400 focus:border-black/20 hover:bg-black/10 dark:border-white/10 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-white/20 dark:hover:bg-white/10 transition-colors rounded-[8px] grain before:rounded-[8px]"
-                            />
-                            <Button
-                                type="button"
-                                onClick={fetchRandomArticle}
-                                disabled={isLoading}
-                                className="bg-white dark:bg-black hover:bg-[#F0F0F0] dark:hover:bg-[#0F0F0F] border-black/100 dark:border-white/100 border-solid border-2 rounded-[8px] text-black dark:text-white"
-                            >
-                                {t('randomButton')}<Sparkles />
-                            </Button>
-                            <Button
-                                type="submit"
-                                disabled={isLoading}
-                                className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors px-6 rounded-[8px]"
-                            >
-                                {isLoading ? t('searchInProgress') : t('searchStart')}
-                            </Button>
+                        <div className="flex gap-3 mobileWrap:flex-col">
+                            <div className='flex flex-row gap-3 flex-grow'>
+                                <Select
+                                    value={selectedLanguage.code}
+                                    onValueChange={handleLanguageChange}
+                                >
+                                    <SelectTrigger className="bg-black/5 dark:bg-white/5 backdrop-blur-sm border-black/10 dark:border-white/10 text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/10 transition-colors rounded-[8px] grain before:rounded-[8px] gap-1.5 w-auto">
+                                        <Globe className="w-4 h-4 mr-0.5" />
+                                        <SelectValue placeholder="Select language" />
+                                    </SelectTrigger>
+                                    <SelectContent className="bg-white/95 border-black/10 text-black dark:bg-black/95 dark:border-white/10 dark:text-white rounded-[8px]">
+                                        {SUPPORTED_LANGUAGES.map((language) => (
+                                            <SelectItem key={language.code} value={language.code} className="hover:bg-black/50 dark:hover:bg-white/50 cursor-pointer rounded-[8px] transition-colors">
+                                                {language.name}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <Input
+                                    type="text"
+                                    value={startArticle}
+                                    onChange={(e) => setStartArticle(e.target.value)}
+                                    placeholder={selectedLanguage.placeholder}
+                                    required
+                                    className="flex-grow bg-black/5 dark:bg-white/5 backdrop-blur-sm border-black/10 text-black placeholder:text-gray-400 focus:border-black/20 hover:bg-black/10 dark:border-white/10 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-white/20 dark:hover:bg-white/10 transition-colors rounded-[8px] grain before:rounded-[8px]"
+                                />
+                            </div>
+                            <div className="flex flex-row gap-3">
+                                <Button
+                                    type="button"
+                                    onClick={fetchRandomArticle}
+                                    disabled={isLoading}
+                                    className="bg-white dark:bg-black hover:bg-[#F0F0F0] dark:hover:bg-[#0F0F0F] border-black/100 dark:border-white/100 border-solid border-2 rounded-[8px] text-black dark:text-white mobileWrap:flex-1"
+                                >
+                                    {t('randomButton')}<Sparkles />
+                                </Button>
+                                <Button
+                                    type="submit"
+                                    disabled={isLoading}
+                                    className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors px-6 rounded-[8px] mobileWrap:flex-1"
+                                >
+                                    {isLoading ? t('searchInProgress') : t('searchStart')}
+                                </Button>
+                            </div>
                         </div>
                     </form>
 
@@ -284,26 +288,26 @@ export default function WikipediaPhilosophyGame() {
                     {path.length > 0 && (
                         <Card className="bg-black/5 dark:bg-white/5 backdrop-blur-sm border-dark/10 dark:border-white/10 animate-slide-up relative grain before:rounded-xl">
                             <CardHeader>
-                                <CardTitle className="text-black dark:text-white flex items-center gap-2">
-                                    <Sparkles className="w-5 h-5" />
+                                <CardTitle className="text-black dark:text-white flex items-center gap-2 mobileWrap:justify-center mobileWrap:text-lg">
+                                    <Sparkles className="size-5 mobileWrap:size-7" />
                                     <span className="flex items-center whitespace-break-spaces">
-                                        <Trans i18nKey="pathToPhilosophy" values={{ philosophyTitle: playingLanguage.philosophyTitle }} className=''>
+                                        <Trans i18nKey="pathToPhilosophy" values={{ philosophyTitle: playingLanguage.philosophyTitle }}>
                                             <span className={`${path[path.length - 1].title.toLowerCase() === playingLanguage.philosophyTitle.toLowerCase() ? "text-green-700 dark:text-green-500" : path[path.length - 1].isLoopCulpit ? "text-red-700 dark:text-red-500" : "text-black dark:text-white"} transition-colors`} ></span>
                                         </Trans>
                                     </span>
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <div className="flex flex-wrap items-center gap-3">
+                                <div className="flex flex-wrap items-center gap-3 mobileWrap:flex-col">
                                     {path.map((step, index) => (
-                                        <div key={index} className="flex items-center group animate-fade-in">
-                                            <span className={`font-medium ${step.title.toLowerCase() === playingLanguage.philosophyTitle.toLowerCase() ? "text-green-700 dark:text-green-500" : step.isLoopCulpit ? "text-red-600 group-hover:text-red-800" : "text-black group-hover:text-gray-700 dark:text-white dark:group-hover:text-gray-300"} transition-colors`}>
+                                        <div key={index} className="flex items-center group animate-fade-in mobileWrap:flex-col">
+                                            <span className={`font-medium ${step.title.toLowerCase() === playingLanguage.philosophyTitle.toLowerCase() ? "text-green-700 dark:text-green-500 mobileWrap:text-xl" : step.isLoopCulpit ? "text-red-600 group-hover:text-red-800 mobileWrap:text-xl" : "text-black group-hover:text-gray-700 dark:text-white dark:group-hover:text-gray-300"} transition-[color,background-color,border-color,text-decoration-color,fill,stroke,font-size] ${index === (path.length - 1) ? "mobileWrap:text-lg" : ""}`}>
                                                 <a href={`https://${playingLanguage.code}.wikipedia.org/wiki/${encodeURIComponent(step.redirectTarget ? step.redirectTarget : step.title)}`} target="_blank" rel="noopener noreferrer">
                                                     {step.redirectTarget ? step.redirectTarget : step.title}
                                                 </a>
                                             </span>
                                             {(step.isRedirect || step.section || step.redirectSection) && (
-                                                <span className={`text-xs ${step.title.toLowerCase() === playingLanguage.philosophyTitle.toLowerCase() ? "text-green-100 dark:text-green-900" : step.isLoopCulpit ? "text-red-100 dark:text-red-900" : "text-gray-500 dark:text-gray-400"} ml-1 translate-y-0.5`}>
+                                                <span className={`text-xs ${step.title.toLowerCase() === playingLanguage.philosophyTitle.toLowerCase() ? "text-green-100 dark:text-green-900 mobileWrap:text-sm" : step.isLoopCulpit ? "text-red-100 dark:text-red-900 mobileWrap:text-sm" : "text-gray-500 dark:text-gray-400"} ml-1 translate-y-0.5 transition-[color,background-color,border-color,text-decoration-color,fill,stroke,font-size] ${index === (path.length - 1) ? "mobileWrap:text-sm" : ""}`}>
                                                     ({step.redirectSection && (<Trans
                                                         i18nKey="sectionMarker"
                                                         values={{ section: step.redirectSection }}
@@ -324,7 +328,7 @@ export default function WikipediaPhilosophyGame() {
                                                 </span>
                                             )}
                                             {index < path.length - 1 && (
-                                                <ArrowRight className="ml-2 text-gray-500 dark:text-gray-400 transition-transform" />
+                                                <ArrowRight className="ml-2 text-gray-500 dark:text-gray-400 transition-transform rotate-0 mobileWrap:rotate-90 mobileWrap:mt-3 mobileWrap:ml-0" />
                                             )}
                                         </div>
                                     ))}
@@ -339,7 +343,7 @@ export default function WikipediaPhilosophyGame() {
             {/* Toggle Scroll Button */}
             <Button
                 onClick={toggleScroll}
-                className="fixed bottom-4 right-4 z-10 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-700 dark:hover:bg-gray-200 transition-colors p-0 rounded-full aspect-square scale-100 hover:scale-125 transition-transform"
+                className="fixed bottom-4 right-4 z-10 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-700 dark:hover:bg-gray-200 transition-[color,background-color,border-color,text-decoration-color,fill,stroke,transform] p-0 rounded-full aspect-square scale-100 hover:scale-125"
             >
                 {isUserScrolling ? <CircleArrowDown className="scale-150" /> : <CirclePause className="scale-150" />}
             </Button>
