@@ -10,6 +10,8 @@ on:
 jobs:
   synchronize-with-crowdin:
     runs-on: ubuntu-latest
+    outputs:
+      BRANCH_EXISTS: ${{ steps.check_branch.outputs.BRANCH_EXISTS }}
 
     steps:
       - name: Checkout
@@ -41,16 +43,13 @@ jobs:
       - name: Check for l10n_crowdin_translations branch
         id: check_branch
         run: |
-          if git ls-remote --exit-code origin refs/heads/l10n_crowdin_translations; then
-            echo "BRANCH_EXISTS=true" >> $GITHUB_ENV
-          else
-            echo "BRANCH_EXISTS=false" >> $GITHUB_ENV
-          fi
+          branch_exists=$(git ls-remote origin refs/heads/l10n_crowdin_translations | grep -q refs/heads/l10n_crowdin_translations && echo true || echo false)
+          echo "BRANCH_EXISTS=${branch_exists}" >> $GITHUB_OUTPUT
 
   update-i18n:
     needs: synchronize-with-crowdin
     runs-on: ubuntu-latest
-    if: needs.synchronize-with-crowdin.outputs.branch_exists == 'true'
+    if: ${{ needs.synchronize-with-crowdin.outputs.BRANCH_EXISTS == 'true' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
