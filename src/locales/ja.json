@@ -16,5 +16,6 @@
     "footer.prodmode": "プロダクション・ビルド",
     "footer.deployed": "GitHub Pages経由でデプロイしました",
     "footer.deployedSHA": "<0>コミット{{sha}}</0>からデプロイされました",
-    "langEmoji": "<0>🇯🇵</0>"
+    "langEmoji": "<0>🇯🇵</0>",
+    "learnButton": "「WP:GTP」とは？"
 }
