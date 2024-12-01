@@ -43,6 +43,7 @@ const SUPPORTED_LANGUAGES: Language[] = [
 ];
 
 const UI_LANGUAGES = ['en', 'sk', 'cs', 'ja'];
+const START_BUTTON_STRINGS = ['searchStart', 'searchInProgress', 'dudeWhyAreYouStartingAtPhilosophyThatIsTheGoal', 'waitRUFR', 'noFuckingWay', 'whatTheFuckDidIDoToDeserveThis', 'IAmJustAHumbleWikipediaCrawlerAndTHISDUDE-', 'orGirl,IDon\'tReallyKnowButHonestlyWhyWouldAGirlWantToEvenDoSomethingThisStupid', 'meaninglessSearchInProgress', 'meaninglessSearchConcluded']
 
 export default function WikipediaPhilosophyGame() {
     const location = useLocation();
@@ -59,6 +60,7 @@ export default function WikipediaPhilosophyGame() {
     const [iLang, setILang] = useState(0);
     const [currentLang, setCurrentLang] = useState(i18n.language);
     const [showLearnButton, setShowLearnButton] = useState(false);
+    const [startButtonState, setStartButtonState] = useState(0);
 
     useLayoutEffect(() => {
         const savedLang = localStorage.getItem('language') || 'en';
@@ -111,7 +113,7 @@ export default function WikipediaPhilosophyGame() {
         try {
             let previousStep: PathStep | null = null;
 
-            while (currentArticle.toLowerCase() !== selectedLanguage.philosophyTitle.toLowerCase() &&
+            while ((currentArticle.toLowerCase() !== selectedLanguage.philosophyTitle.toLowerCase() || (visitedArticles.size === 0)) &&
                 (!visitedArticles.has(currentArticle) ||
                     (visitedArticles.has(currentArticle) && (previousStep?.redirectTarget === currentArticle)))) {
                 visitedArticles.add(currentArticle);
@@ -155,6 +157,7 @@ export default function WikipediaPhilosophyGame() {
             setError(err instanceof Error ? err.message : 'An unexpected error occurred');
         } finally {
             setIsLoading(false);
+            setStartButtonState(prev => startArticle !== playingLanguage.philosophyTitle ? 0 : prev + 1);
         }
     }
 
@@ -203,7 +206,7 @@ export default function WikipediaPhilosophyGame() {
     }
 
     return (
-        <div className="min-h-screen bg-white dark:bg-black relative overflow-hidden flex">
+        <div className="min-h-screen bg-white dark:bg-black transition-colors relative overflow-hidden flex">
             <GridBG />
             <GlowFX />
 
@@ -224,19 +227,20 @@ export default function WikipediaPhilosophyGame() {
                             </div>
                         </div>
                         <h1 className="text-5xl font-bold mb-3 text-black dark:text-white tracking-tight font-wiki">
-                            {t('title')}
+                            {t('title')}<sup className='text-2xl -top-5 dark:text-blue-400 text-blue-600 cursor-pointer' onClick={() => { if (startButtonState < 8) { setShowLearnButton(true); setStartArticle('WP:GTP'); }; setSelectedLanguage(SUPPORTED_LANGUAGES[2]); window.open('https://en.wikipedia.org/wiki/WP:GTP', '_blank'); }}>[<span className='hover:underline'>1</span>]</sup>
                         </h1>
                         <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
                             {t('subtitle')}
                         </p>
                     </div>
 
-                    <form onSubmit={startArticle === 'Special:Random' ? (e) => { e.preventDefault(); fetchRandomArticle() } : startGame} className="mb-8 animate-slide-up">
+                    <form onSubmit={startArticle === 'Special:Random' ? (e) => { e.preventDefault(); fetchRandomArticle() } : startArticle === selectedLanguage.philosophyTitle ? (e) => { e.preventDefault(); if (startButtonState === 0) { setStartButtonState(2) } else { if (startButtonState === 7) { startGame() } else if (startButtonState === 9) { navigate("", { replace: true }); window.location.reload(); return; }; setStartButtonState(startButtonState + 1) }} : startGame} className="mb-8 animate-slide-up">
                         <div className="flex gap-3 mobileWrap:flex-col">
                             <div className='flex flex-row gap-3 flex-grow'>
                                 <Select
                                     value={selectedLanguage.code}
                                     onValueChange={handleLanguageChange}
+                                    disabled={startButtonState >= 8}
                                 >
                                     <SelectTrigger className="bg-black/5 dark:bg-white/5 backdrop-blur-sm border-black/10 dark:border-white/10 text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/10 transition-colors rounded-[8px] grain before:rounded-[8px] gap-1.5 w-auto">
                                         <Globe className="w-4 h-4 mr-0.5" />
@@ -260,6 +264,7 @@ export default function WikipediaPhilosophyGame() {
                                     placeholder={selectedLanguage.placeholder}
                                     required
                                     className="flex-grow bg-black/5 dark:bg-white/5 backdrop-blur-sm border-black/10 text-black placeholder:text-gray-400 focus:border-black/20 hover:bg-black/10 dark:border-white/10 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-white/20 dark:hover:bg-white/10 transition-colors rounded-[8px] grain before:rounded-[8px]"
+                                    disabled={startButtonState >= 8}
                                 />
                             </div>
                             <div className="flex flex-row gap-3">
@@ -275,7 +280,7 @@ export default function WikipediaPhilosophyGame() {
                                 <Button
                                     type="button"
                                     onClick={fetchRandomArticle}
-                                    disabled={isLoading}
+                                    disabled={isLoading || startButtonState >= 8}
                                     className="bg-white dark:bg-black hover:bg-[#F0F0F0] dark:hover:bg-[#0F0F0F] border-black/100 dark:border-white/100 border-solid border-2 rounded-[8px] text-black dark:text-white mobileWrap:flex-1"
                                 >
                                     {t('randomButton')}<Sparkles />
@@ -283,9 +288,9 @@ export default function WikipediaPhilosophyGame() {
                                 <Button
                                     type="submit"
                                     disabled={isLoading}
-                                    className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors px-6 rounded-[8px] mobileWrap:flex-1"
+                                    className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors px-6 rounded-[8px] whitespace-pre-wrap h-fit mobileWrap:flex-1"
                                 >
-                                    {isLoading ? t('searchInProgress') : t('searchStart')}
+                                    {(isLoading && startArticle !== playingLanguage.philosophyTitle) ? t('searchInProgress') : t(START_BUTTON_STRINGS[startButtonState])}
                                 </Button>
                             </div>
                         </div>
@@ -307,7 +312,7 @@ export default function WikipediaPhilosophyGame() {
                                     <Sparkles className="size-5 mobileWrap:size-7" />
                                     <span className="flex items-center whitespace-break-spaces">
                                         <Trans i18nKey="pathToPhilosophy" values={{ philosophyTitle: playingLanguage.philosophyTitle }}>
-                                            <span className={`${path[path.length - 1].title.toLowerCase() === playingLanguage.philosophyTitle.toLowerCase() ? "text-green-700 dark:text-green-500" : path[path.length - 1].isLoopCulpit ? "text-red-700 dark:text-red-500" : "text-black dark:text-white"} transition-colors`} ></span>
+                                            <span className={`${(path[path.length - 1].title.toLowerCase() === playingLanguage.philosophyTitle.toLowerCase() && path.length !== 1) ? "text-green-700 dark:text-green-500" : path[path.length - 1].isLoopCulpit ? "text-red-700 dark:text-red-500" : "text-black dark:text-white"} transition-colors`} ></span>
                                         </Trans>
                                     </span>
                                 </CardTitle>
@@ -316,13 +321,13 @@ export default function WikipediaPhilosophyGame() {
                                 <div className="flex flex-wrap items-center gap-3 mobileWrap:flex-col">
                                     {path.map((step, index) => (
                                         <div key={index} className="flex items-center group animate-fade-in mobileWrap:flex-col">
-                                            <span className={`font-medium ${step.title.toLowerCase() === playingLanguage.philosophyTitle.toLowerCase() ? "text-green-700 dark:text-green-500 mobileWrap:text-xl" : step.isLoopCulpit ? "text-red-600 group-hover:text-red-800 mobileWrap:text-xl" : "text-black group-hover:text-gray-700 dark:text-white dark:group-hover:text-gray-300"} transition-[color,background-color,border-color,text-decoration-color,fill,stroke,font-size] ${index === (path.length - 1) ? "mobileWrap:text-lg" : ""}`}>
+                                            <span className={`font-medium ${(step.title.toLowerCase() === playingLanguage.philosophyTitle.toLowerCase() && index !== 0) ? "text-green-700 dark:text-green-500 mobileWrap:text-xl" : step.isLoopCulpit ? "text-red-600 group-hover:text-red-800 mobileWrap:text-xl" : "text-black group-hover:text-gray-700 dark:text-white dark:group-hover:text-gray-300"} transition-[color,background-color,border-color,text-decoration-color,fill,stroke,font-size] ${index === (path.length - 1) ? "mobileWrap:text-lg" : ""}`}>
                                                 <a href={`https://${playingLanguage.code}.wikipedia.org/wiki/${encodeURIComponent(step.redirectTarget ? step.redirectTarget : step.title)}`} target="_blank" rel="noopener noreferrer">
                                                     {step.redirectTarget ? step.redirectTarget : step.title}
                                                 </a>
                                             </span>
                                             {(step.isRedirect || step.section || step.redirectSection) && (
-                                                <span className={`text-xs ${step.title.toLowerCase() === playingLanguage.philosophyTitle.toLowerCase() ? "text-green-100 dark:text-green-900 mobileWrap:text-sm" : step.isLoopCulpit ? "text-red-100 dark:text-red-900 mobileWrap:text-sm" : "text-gray-500 dark:text-gray-400"} ml-1 translate-y-0.5 transition-[color,background-color,border-color,text-decoration-color,fill,stroke,font-size] ${index === (path.length - 1) ? "mobileWrap:text-sm" : ""}`}>
+                                                <span className={`text-xs ${(step.title.toLowerCase() === playingLanguage.philosophyTitle.toLowerCase() && index !== 0) ? "text-green-100 dark:text-green-900 mobileWrap:text-sm" : step.isLoopCulpit ? "text-red-100 dark:text-red-900 mobileWrap:text-sm" : "text-gray-500 dark:text-gray-400"} ml-1 translate-y-0.5 transition-[color,background-color,border-color,text-decoration-color,fill,stroke,font-size] ${index === (path.length - 1) ? "mobileWrap:text-sm" : ""}`}>
                                                     ({step.redirectSection && (<Trans
                                                         i18nKey="sectionMarker"
                                                         values={{ section: step.redirectSection }}
