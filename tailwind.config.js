@@ -96,6 +96,7 @@ module.exports = {
         },
         screens: {
           'hoverNone': { raw: '(hover: none) or (cursor: coarse)' },
+          'mobileWrap': { raw: '(max-width: 767px)' },
         },
       },
     },
