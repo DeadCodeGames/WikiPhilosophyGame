@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { GridBG, GlowFX } from '@/components/bg'
 import Footer from '@/components/ui/footer'
 import { parseWikipediaArticle } from '@/utils/wikipediaApi'
-import { ArrowRight, Globe, BookOpen, Sparkles, CircleArrowDown, CirclePause, Sun, Moon } from 'lucide-react'
+import { ArrowRight, Globe, BookOpen, Sparkles, CircleArrowDown, CirclePause, Sun, Moon, Info } from 'lucide-react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Trans, useTranslation } from 'react-i18next';
 import Twemoji from 'react-twemoji';
@@ -58,6 +58,7 @@ export default function WikipediaPhilosophyGame() {
     const { t, i18n } = useTranslation();
     const [iLang, setILang] = useState(0);
     const [currentLang, setCurrentLang] = useState(i18n.language);
+    const [showLearnButton, setShowLearnButton] = useState(false);
 
     useLayoutEffect(() => {
         const savedLang = localStorage.getItem('language') || 'en';
@@ -88,6 +89,7 @@ export default function WikipediaPhilosophyGame() {
 
         if (articleParam) {
             setStartArticle(articleParam);
+            setShowLearnButton(/(WP|Wikipedia):(Find the loop|GTP|(Get|Getting) to Philosophy)/i.test(articleParam))
         }
     }, [location.search]);
 
@@ -161,6 +163,7 @@ export default function WikipediaPhilosophyGame() {
         const data = await response.json();
         const randomTitle = data.items[0].title;
         setStartArticle(randomTitle);
+        setShowLearnButton(/(WP|Wikipedia):(Find the loop|GTP|(Get|Getting) to Philosophy)/i.test(randomTitle))
         startGame(undefined, randomTitle);
     }
 
@@ -250,13 +253,25 @@ export default function WikipediaPhilosophyGame() {
                                 <Input
                                     type="text"
                                     value={startArticle}
-                                    onChange={(e) => setStartArticle(e.target.value)}
+                                    onChange={(e) => {
+                                        setStartArticle(e.target.value);
+                                        setShowLearnButton(/(WP|Wikipedia):(Find the loop|GTP|(Get|Getting) to Philosophy)/i.test(e.target.value));
+                                    }}
                                     placeholder={selectedLanguage.placeholder}
                                     required
                                     className="flex-grow bg-black/5 dark:bg-white/5 backdrop-blur-sm border-black/10 text-black placeholder:text-gray-400 focus:border-black/20 hover:bg-black/10 dark:border-white/10 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-white/20 dark:hover:bg-white/10 transition-colors rounded-[8px] grain before:rounded-[8px]"
                                 />
                             </div>
                             <div className="flex flex-row gap-3">
+                                {showLearnButton && (
+                                    <Button
+                                        type="button"
+                                        className="bg-white dark:bg-black hover:bg-[#F0F0F0] dark:hover:bg-[#0F0F0F] border-black/100 dark:border-white/100 border-solid border-2 rounded-[8px] text-black dark:text-white mobileWrap:flex-1"
+                                        onClick={() => {window.open("https://en.wikipedia.org/wiki/Wikipedia:Getting_to_Philosophy", "_blank")}}
+                                    >
+                                        {t('learnButton')}<Info />
+                                    </Button>
+                                )}
                                 <Button
                                     type="button"
                                     onClick={fetchRandomArticle}
