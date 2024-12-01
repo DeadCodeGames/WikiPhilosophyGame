@@ -16,5 +16,6 @@
     "footer.prodmode": "Produkční Sestava",
     "footer.deployed": "Publikováno přes GitHub Pages",
     "footer.deployedSHA": "Publikováno z commitu <0>{{sha}}</0>",
-    "langEmoji": "<0>🇨🇿</0>"
+    "langEmoji": "<0>🇨🇿</0>",
+    "learnButton": "Co je WP:GTP?"
 }
