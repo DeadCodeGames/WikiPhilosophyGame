@@ -234,7 +234,7 @@ export default function WikipediaPhilosophyGame() {
                         </p>
                     </div>
 
-                    <form onSubmit={startArticle === 'Special:Random' ? (e) => { e.preventDefault(); fetchRandomArticle() } : startArticle === selectedLanguage.philosophyTitle ? (e) => { e.preventDefault(); if (startButtonState === 0) { setStartButtonState(2) } else { if (startButtonState === 7) { startGame() } else if (startButtonState === 9) { navigate("", { replace: true }); window.location.reload(); return; }; setStartButtonState(startButtonState + 1) }} : startGame} className="mb-8 animate-slide-up">
+                    <form onSubmit={startArticle === 'Special:Random' ? (e) => { e.preventDefault(); fetchRandomArticle() } : startArticle === selectedLanguage.philosophyTitle ? (e) => { e.preventDefault(); if (startButtonState === 0) { setStartButtonState(2) } else { if (startButtonState === 7) { startGame() } else if (startButtonState === 9) { navigate("?", { replace: true }); window.location.reload(); return; }; setStartButtonState(startButtonState + 1) }} : startGame} className="mb-8 animate-slide-up">
                         <div className="flex gap-3 mobileWrap:flex-col">
                             <div className='flex flex-row gap-3 flex-grow'>
                                 <Select
