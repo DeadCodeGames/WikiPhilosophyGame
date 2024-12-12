@@ -42,7 +42,7 @@ const SUPPORTED_LANGUAGES: Language[] = [
     { code: 'ru', name: 'Русский', philosophyTitle: 'Философия', placeholder: "Введите название статьи в Русском Википедии" },
 ];
 
-const UI_LANGUAGES = ['en', 'sk', 'cs', 'ja'];
+const UI_LANGUAGES = ['en', 'sk', 'cs', 'ja', 'zh'];
 const START_BUTTON_STRINGS = ['searchStart', 'searchInProgress', 'dudeWhyAreYouStartingAtPhilosophyThatIsTheGoal', 'waitRUFR', 'noFuckingWay', 'whatTheFuckDidIDoToDeserveThis', 'IAmJustAHumbleWikipediaCrawlerAndTHISDUDE-', 'orGirl,IDon\'tReallyKnowButHonestlyWhyWouldAGirlWantToEvenDoSomethingThisStupid', 'meaninglessSearchInProgress', 'meaninglessSearchConcluded']
 
 export default function WikipediaPhilosophyGame() {

@@ -5,12 +5,14 @@ import en from './en.json';
 import sk from './sk.json';
 import cs from './cs.json';
 import ja from './ja.json';
+import zh from './zh.json';
 
 const resources = {
   en: { translation: en },
   sk: { translation: sk },
   cs: { translation: cs },
   ja: { translation: ja },
+  zh: { translation: zh },
 };
 
 i18n
