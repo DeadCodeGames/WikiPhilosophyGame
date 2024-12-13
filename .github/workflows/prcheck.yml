@@ -12,8 +12,11 @@ concurrency:
 
 on:
   pull_request:
-    branches:
-      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
 
 jobs:
   build:
@@ -40,22 +43,11 @@ jobs:
       - name: Build React app
         run: CI=true npm run build
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./build
-          name: ${{ github.event.pull_request.number && format('github-pages-{0}', github.event.pull_request.number) || 'github-pages' }}
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@b39c421b98f49d83ae50ec502c3ddfc3bf28f2c6
+        uses: rossjrw/pr-preview-action@v1
         with:
-          artifact_name: ${{ github.event.pull_request.number && format('github-pages-{0}', github.event.pull_request.number) || 'github-pages' }}
-          preview: true
+          source-dir: build
+          preview-branch: main
+          umbrella-dir: preview
+          action: auto
