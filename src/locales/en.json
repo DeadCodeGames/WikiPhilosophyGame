@@ -16,6 +16,7 @@
     "footer.prodmode": "Production Build",
     "footer.deployed": "Deployed via GitHub Pages",
     "footer.deployedSHA": "Deployed from <0>{{sha}}</0>",
+    "footer.prPreview": "Deployed from commit <0>{{sha}}</0> in PR <1>#{{prNumber}}</1></0>",
     "langEmoji": "<0>🇬🇧</0>",
     "learnButton": "What is WP:GTP?",
     "dudeWhyAreYouStartingAtPhilosophyThatIsTheGoal": "… Are you serious?",

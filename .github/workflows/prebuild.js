@@ -15,12 +15,13 @@ fs.readFile(footerPath, 'utf8', (err, data) => {
     const commitLink = process.env.GITHUB_SHA ? `https://github.com/DeadCodeGames/WikiPhilosophyGame/commit/${process.env.GITHUB_SHA}` : undefined;
     const shortSHA = process.env.GITHUB_SHA ? process.env.GITHUB_SHA.match(/.{1,7}/g)[0] : undefined;
     const prNumber = process.env.PR_NUMBER;
+    const prLink = process.env.PR_NUMBER ? `https://github.com/DeadCodeGames/WikiPhilosophyGame/pull/${prNumber}` : undefined;
 
     // Modify the replacement logic to include PR preview information
     let deploymentInfo = '';
     if (prNumber) {
         // PR preview deployment
-        deploymentInfo = `<Trans i18nKey="footer.prPreview" values={{ prNumber: "${prNumber}", sha: "${shortSHA}" }}><a href="${commitLink}"></a></Trans>`;
+        deploymentInfo = `<Trans i18nKey="footer.prPreview" values={{ prNumber: "${prNumber}", sha: "${shortSHA}" }}><a href="${commitLink}"></a><a href="${prLink}"></a></Trans>`;
     } else if (commitLink && shortSHA) {
         // Main branch deployment
         deploymentInfo = `<Trans i18nKey="footer.deployedSHA" values={{ sha: "${shortSHA}" }}><a href="${commitLink}"></a></Trans>`;
