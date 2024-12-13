@@ -55,7 +55,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@b39c421b98f49d83ae50ec502c3ddfc3bf28f2c6
         with:
           artifact_name: ${{ github.event.pull_request.number && format('github-pages-{0}', github.event.pull_request.number) || 'github-pages' }}
           preview: true
