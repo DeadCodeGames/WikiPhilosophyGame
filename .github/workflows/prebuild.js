@@ -17,7 +17,7 @@ fs.readFile(footerPath, 'utf8', (err, data) => {
     const shortSHA = SHA ? SHA.match(/.{1,7}/g)[0] : undefined;
 
     let deploymentInfo = '';
-    if (prNumber) {
+    if (PR) {
         // PR preview deployment
         deploymentInfo = `<Trans i18nKey="footer.prPreview" values={{ prNumber: "${PR}", sha: "${shortSHA}" }}><a href="${commitLink}"></a><a href="${prLink}"></a></Trans>`;
     } else if (commitLink && shortSHA) {
