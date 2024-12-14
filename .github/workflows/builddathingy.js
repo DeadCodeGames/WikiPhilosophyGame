@@ -9,7 +9,7 @@ function execCommand(command) {
 }
 
 // Function to build the project
-function buildProject(branch, outputDir, multipleSources, prNumber = null) {
+function buildProject(branch, outputDir, prNumber = null) {
     console.log(`Building branch: ${branch}`);
     fs.cpSync(path.join(".github"), path.join(".build", "temp", ".github"), { recursive: true });
     execCommand(`git checkout ${branch} --force`);
@@ -17,7 +17,7 @@ function buildProject(branch, outputDir, multipleSources, prNumber = null) {
     const lastCommitSHA = execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim();
     fs.cpSync(path.join(".build", "temp", ".github"), path.join(".github"), { recursive: true });
     fs.rmSync(path.join(".build", "temp", ".github"), { recursive: true });
-    execCommand(`node .github/workflows/prebuild.js ${multipleSources} ${lastCommitSHA}${prNumber !== null ? ` ${prNumber}` : ''}`);
+    execCommand(`node .github/workflows/prebuild.js ${lastCommitSHA}${prNumber !== null ? ` ${prNumber}` : ''}`);
     execCommand('npm install --force --silent'); // Install dependencies
     execCommand('npm run build'); // Build the project
 
@@ -53,7 +53,7 @@ function main() {
 
     // Checkout the main branch and build it
     execCommand('git fetch');
-    buildProject('main', buildDir, multipleSources);
+    buildProject('main', buildDir);
 
     // Build each PR branch
     prs.forEach(pr => {
@@ -62,16 +62,14 @@ function main() {
         const outputDir = path.join(prPreviewDir, `pr-${prNumber}`);
 
         try {
-            buildProject(prBranch, outputDir, multipleSources, prNumber);
+            buildProject(prBranch, outputDir,  prNumber);
         } catch (e) {
             console.error(`Failed to build branch ${prBranch}: ${e}`);
             prs[prs.indexOf(pr)].failed = true;
         }
     });
 
-    if (multipleSources) {
-        buildPreview(prs)
-    }
+    buildPreview(prs)
 
     console.log('All builds completed.');
     fs.rmdirSync(path.join(".build", "temp"), { recursive: true });

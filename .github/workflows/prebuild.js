@@ -3,7 +3,7 @@ const path = require('path');
 
 // Define the path to the footer.tsx file
 const footerPath = path.join(__dirname, '../../src/components/ui/footer.tsx');
-const multipleSources = process.argv[2], SHA = process.argv[3], PR = process.argv[4];
+const SHA = process.argv[2], PR = process.argv[3];
 
 // Read the footer.tsx file
 fs.readFile(footerPath, 'utf8', (err, data) => {
@@ -20,10 +20,10 @@ fs.readFile(footerPath, 'utf8', (err, data) => {
     let deploymentInfo = '';
     if (PR && commitLink && shortSHA) {
         // PR preview deployment
-        deploymentInfo = `<Trans i18nKey="footer.prPreview" values={{ prNumber: "${PR}", sha: "${shortSHA}" }}><a href="${commitLink}"></a><a href="${prLink}"></a></Trans>${multipleSources ? `</span><span><Trans i18nKey="footer.previewMore"><a href="https://deadcodegames.github.io/WikiPhilosophyGame/preview"></a></Trans>` : ''}`;
+        deploymentInfo = `<Trans i18nKey="footer.prPreview" values={{ prNumber: "${PR}", sha: "${shortSHA}" }}><a href="${commitLink}"></a><a href="${prLink}"></a></Trans></span><span><Trans i18nKey="footer.previewMore"><a href="https://deadcodegames.github.io/WikiPhilosophyGame/preview"></a></Trans>`;
     } else if (commitLink && shortSHA) {
         // Main branch deployment
-        deploymentInfo = `<Trans i18nKey="footer.deployedSHA" values={{ sha: "${shortSHA}" }}><a href="${commitLink}"></a></Trans>${multipleSources ? `</span><span><Trans i18nKey="footer.previewMore"><a href="https://deadcodegames.github.io/WikiPhilosophyGame/preview"></a></Trans>` : ''}`;
+        deploymentInfo = `<Trans i18nKey="footer.deployedSHA" values={{ sha: "${shortSHA}" }}><a href="${commitLink}"></a></Trans></span><span><Trans i18nKey="footer.previewMore"><a href="https://deadcodegames.github.io/WikiPhilosophyGame/preview"></a></Trans>`;
     } else {
         // Fallback
         deploymentInfo = "{t('footer.deployed')}";
