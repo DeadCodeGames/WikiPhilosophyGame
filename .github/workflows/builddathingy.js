@@ -9,7 +9,7 @@ function execCommand(command) {
 }
 
 // Function to build the project
-function buildProject(branch, outputDir, prNumber) {
+function buildProject(branch, outputDir, prNumber = null) {
     console.log(`Building branch: ${branch}`);
     fs.cpSync(path.join(".github"), path.join(".build", "temp", ".github"), { recursive: true });
     execCommand(`git checkout ${branch} --force`);
@@ -17,7 +17,7 @@ function buildProject(branch, outputDir, prNumber) {
     const lastCommitSHA = execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim();
     fs.cpSync(path.join(".build", "temp", ".github"), path.join(".github"), { recursive: true });
     fs.rmSync(path.join(".build", "temp", ".github"), { recursive: true });
-    execCommand(`node .github/workflows/prebuild.js ${lastCommitSHA}${prNumber ? ` ${prNumber}` : ''}`);
+    execCommand(`node .github/workflows/prebuild.js ${lastCommitSHA}${prNumber !== null ? ` ${prNumber}` : ''}`);
     execCommand('npm install --force --silent'); // Install dependencies
     execCommand('npm run build'); // Build the project
 

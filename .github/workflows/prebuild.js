@@ -32,7 +32,7 @@ fs.readFile(footerPath, 'utf8', (err, data) => {
     // Replace the NODE_ENV check with the new string
     const updatedData = data.replace(
         '{t(process.env.NODE_ENV === "development" ? "footer.devmode" : "footer.prodmode")}',
-        `${(commitLink && shortSHA) ? `<Trans i18nKey="footer.deployedSHA" values={{ sha: "${shortSHA}" }}><a href="${commitLink}"></a></Trans>` : "{t('footer.deployed')}"}`
+        deploymentInfo
     );
 
     // Write the updated content back to footer.tsx
