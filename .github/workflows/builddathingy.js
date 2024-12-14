@@ -23,7 +23,7 @@ function buildProject(branch, outputDir, multipleSources, prNumber = null) {
 
     // Check if the output directory exists, create it if it doesn't
     if (!fs.existsSync(outputDir)) {
-        fs.mkdirSync(outputDir)
+        fs.mkdirSync(outputDir, { recursive: true });
     }
 
     // Copy build files to output directory
