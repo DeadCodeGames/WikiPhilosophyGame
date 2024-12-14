@@ -3,6 +3,7 @@ const path = require('path');
 
 // Define the path to the footer.tsx file
 const footerPath = path.join(__dirname, '../../src/components/ui/footer.tsx');
+const multipleSources = process.argv[2], SHA = process.argv[3], PR = process.argv[4];
 
 // Read the footer.tsx file
 fs.readFile(footerPath, 'utf8', (err, data) => {
@@ -12,13 +13,26 @@ fs.readFile(footerPath, 'utf8', (err, data) => {
     }
 
     // Get the commit link from the environment variable
-    const commitLink = process.env.GITHUB_SHA ? `https://github.com/DeadCodeGames/WikiPhilosophyGame/commit/${process.env.GITHUB_SHA}` : undefined;
-    const shortSHA = process.env.GITHUB_SHA ? process.env.GITHUB_SHA.match(/.{1,7}/g)[0] : undefined;
+    const commitLink = SHA ? `https://github.com/DeadCodeGames/WikiPhilosophyGame/commit/${SHA}` : undefined;
+    const shortSHA = SHA ? SHA.match(/.{1,7}/g)[0] : undefined;
+    const prLink = PR ? `https://github.com/DeadCodeGames/WikiPhilosophyGame/pull/${PR}` : undefined;
+
+    let deploymentInfo = '';
+    if (PR && commitLink && shortSHA) {
+        // PR preview deployment
+        deploymentInfo = `<Trans i18nKey="footer.prPreview" values={{ prNumber: "${PR}", sha: "${shortSHA}" }}><a href="${commitLink}"></a><a href="${prLink}"></a></Trans>${multipleSources ? `</span><span><Trans i18nKey="footer.previewMore"><a href="https://deadcodegames.github.io/WikiPhilosophyGame/preview"></a></Trans>` : ''}`;
+    } else if (commitLink && shortSHA) {
+        // Main branch deployment
+        deploymentInfo = `<Trans i18nKey="footer.deployedSHA" values={{ sha: "${shortSHA}" }}><a href="${commitLink}"></a></Trans>${multipleSources ? `</span><span><Trans i18nKey="footer.previewMore"><a href="https://deadcodegames.github.io/WikiPhilosophyGame/preview"></a></Trans>` : ''}`;
+    } else {
+        // Fallback
+        deploymentInfo = "{t('footer.deployed')}";
+    }
 
     // Replace the NODE_ENV check with the new string
     const updatedData = data.replace(
         '{t(process.env.NODE_ENV === "development" ? "footer.devmode" : "footer.prodmode")}',
-        `${(commitLink && shortSHA) ? `<Trans i18nKey="footer.deployedSHA" values={{ sha: "${shortSHA}" }}><a href="${commitLink}"></a></Trans>` : "{t('footer.deployed')}"}`
+        deploymentInfo
     );
 
     // Write the updated content back to footer.tsx

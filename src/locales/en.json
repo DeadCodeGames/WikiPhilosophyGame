@@ -16,6 +16,8 @@
     "footer.prodmode": "Production Build",
     "footer.deployed": "Deployed via GitHub Pages",
     "footer.deployedSHA": "Deployed from <0>{{sha}}</0>",
+    "footer.prPreview": "Deployed from commit <0>{{sha}}</0> in <1>PR #{{prNumber}}</1>",
+    "footer.previewMore": "View all deployed sources <0>here</0>",
     "langEmoji": "<0>🇬🇧</0>",
     "learnButton": "What is WP:GTP?",
     "dudeWhyAreYouStartingAtPhilosophyThatIsTheGoal": "… Are you serious?",
@@ -25,5 +27,8 @@
     "IAmJustAHumbleWikipediaCrawlerAndTHISDUDE-": "Okay, fine. I will let you…",
     "orGirl,IDon'tReallyKnowButHonestlyWhyWouldAGirlWantToEvenDoSomethingThisStupid": "Just get it over with…",
     "meaninglessSearchInProgress": "What am I doing with my existence…",
-    "meaninglessSearchConcluded": "Happy? Now, get lost."
+    "meaninglessSearchConcluded": "Happy? Now, get lost.",
+    "preview.title": "Deployments",
+    "preview.GitHubBranch": "View on GitHub",
+    "preview.previewLink": "Open Deployment"
 }
