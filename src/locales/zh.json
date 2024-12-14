@@ -16,6 +16,8 @@
     "footer.prodmode": "编译版本",
     "footer.deployed": "通过GitHub Pages部署",
     "footer.deployedSHA": "从<0>{{sha}}</0>部署",
+    "footer.prPreview": "从提交<0>{{sha}}</0>中部署、 位于<1>PR #{{prNumber}}</1>",
+    "footer.previewMore": "<0>此处</0>查看所有已部署的源",
     "langEmoji": "<0>🇨🇳</0>",
     "learnButton": "「 WP:GTP 」是什么？",
     "dudeWhyAreYouStartingAtPhilosophyThatIsTheGoal": "…你是严重的吗？",
@@ -25,5 +27,8 @@
     "IAmJustAHumbleWikipediaCrawlerAndTHISDUDE-": "好吧、 随你…",
     "orGirl,IDon'tReallyKnowButHonestlyWhyWouldAGirlWantToEvenDoSomethingThisStupid": "赶紧结束吧…",
     "meaninglessSearchInProgress": "我到底为什么要这样…",
-    "meaninglessSearchConcluded": "高兴了吧？现在，滚吧。"
+    "meaninglessSearchConcluded": "高兴了吧？现在，滚吧。",
+    "preview.title": "部署",
+    "preview.GitHubBranch": "在GitHub上查看",
+    "preview.previewLink": "开放式部署"
 }

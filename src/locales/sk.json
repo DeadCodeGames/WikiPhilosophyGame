@@ -16,6 +16,8 @@
     "footer.prodmode": "Produkčná Zostava",
     "footer.deployed": "Zverejnené cez GitHub Pages",
     "footer.deployedSHA": "Zverejnené z commitu <0>{{sha}}</0>",
+    "footer.prPreview": "Zverejnené z commitu <0>{{sha}}</0> v <1>Pull Requeste #{{prNumber}}</1>",
+    "footer.previewMore": "Všetky zverejnené zdroje nájdete <0>tu</0>",
     "langEmoji": "<0>🇸🇰</0>",
     "learnButton": "Čo je WP:GTP?",
     "dudeWhyAreYouStartingAtPhilosophyThatIsTheGoal": "… To myslíš vážne?",
@@ -25,5 +27,8 @@
     "IAmJustAHumbleWikipediaCrawlerAndTHISDUDE-": "Okay, fajn. Len do toho…",
     "orGirl,IDon'tReallyKnowButHonestlyWhyWouldAGirlWantToEvenDoSomethingThisStupid": "Nech to už máme za sebou…",
     "meaninglessSearchInProgress": "Čo to robím so svojou existenciou…",
-    "meaninglessSearchConcluded": "Hotovo. Teraz sa strať…"
+    "meaninglessSearchConcluded": "Hotovo. Teraz sa strať…",
+    "preview.title": "Publikácie",
+    "preview.GitHubBranch": "Zobraziť na GitHube",
+    "preview.previewLink": "Otvoriť zverejnenú stránku"
 }

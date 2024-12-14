@@ -16,6 +16,8 @@
     "footer.prodmode": "プロダクション・ビルド",
     "footer.deployed": "GitHub Pages経由でデプロイしました",
     "footer.deployedSHA": "<0>コミット{{sha}}</0>からデプロイされました",
+    "footer.prPreview": "<1>PR #{{prNumber}}</1>で<0>コミット{{sha}}</0>からデプロイされました",
+    "footer.previewMore": "デプロイされたすべてのソースを<0>こちら</0>で表示します",
     "langEmoji": "<0>🇯🇵</0>",
     "learnButton": "「WP:GTP」とは？",
     "dudeWhyAreYouStartingAtPhilosophyThatIsTheGoal": "…本気で？",
@@ -25,5 +27,8 @@
     "IAmJustAHumbleWikipediaCrawlerAndTHISDUDE-": "はい、ワカッタ。お任せるよ…",
     "orGirl,IDon'tReallyKnowButHonestlyWhyWouldAGirlWantToEvenDoSomethingThisStupid": "とっとと終わらせて…",
     "meaninglessSearchInProgress": "自分の存在をどうしているんだろう…",
-    "meaninglessSearchConcluded": "嬉しいな？今、消えろヨ゙。"
+    "meaninglessSearchConcluded": "嬉しいな？今、消えろヨ゙。",
+    "preview.title": "デプロイメンツ",
+    "preview.GitHubBranch": "GitHubで見る",
+    "preview.previewLink": "デプロイメントを開ける"
 }
