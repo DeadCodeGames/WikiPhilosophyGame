@@ -45,7 +45,7 @@ function main() {
     // Get all open PRs
     const prList = execSync('gh pr list --state open --json number,headRefName,commits', { encoding: 'utf-8' });
     const prs = JSON.parse(prList);
-    const multipleSources = prs.length > 1;
+    const multipleSources = prs.length > 0;
 
     // Checkout the main branch and build it
     execCommand('git fetch');
