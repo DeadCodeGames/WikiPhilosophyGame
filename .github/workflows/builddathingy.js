@@ -61,7 +61,7 @@ function main() {
     });
 
     console.log('All builds completed.');
-    fs.rm(path.join(".build", "temp"), { recursive: true });
+    fs.rmdirSync(path.join(".build", "temp"), { recursive: true });
 }
 
 // Run the main function
