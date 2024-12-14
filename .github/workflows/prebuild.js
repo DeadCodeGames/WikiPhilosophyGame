@@ -15,6 +15,7 @@ fs.readFile(footerPath, 'utf8', (err, data) => {
     // Get the commit link from the environment variable
     const commitLink = SHA ? `https://github.com/DeadCodeGames/WikiPhilosophyGame/commit/${SHA}` : undefined;
     const shortSHA = SHA ? SHA.match(/.{1,7}/g)[0] : undefined;
+    const prLink = PR ? `https://github.com/DeadCodeGames/WikiPhilosophyGame/pull/${PR}` : undefined;
 
     let deploymentInfo = '';
     if (PR) {

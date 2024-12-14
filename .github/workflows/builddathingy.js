@@ -18,7 +18,7 @@ function buildProject(branch, outputDir, prNumber = null) {
     fs.cpSync(path.join(".build", "temp", ".github"), path.join(".github"), { recursive: true });
     fs.rmSync(path.join(".build", "temp", ".github"), { recursive: true });
     execCommand(`node .github/workflows/prebuild.js ${lastCommitSHA}${prNumber !== null ? ` ${prNumber}` : ''}`);
-    execCommand('npm install --force'); // Install dependencies
+    execCommand('npm install --force --silent'); // Install dependencies
     execCommand('npm run build'); // Build the project
 
     // Check if the output directory exists, create it if it doesn't
