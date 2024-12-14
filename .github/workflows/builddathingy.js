@@ -44,7 +44,7 @@ function main() {
 
     // Checkout the main branch and build it
     execCommand('git fetch');
-    buildProject('remotes/origin/HEAD', buildDir);
+    buildProject('main', buildDir);
     buildPreview()
 
     // Get all open PRs
