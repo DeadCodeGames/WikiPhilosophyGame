@@ -1,45 +1,40 @@
-name: Deploy to GitHub Pages
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-permissions:
+name: Build and Deploy to GitHub Pages
+
+permissions: 
   contents: read
   pages: write
   id-token: write
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-jobs:
 
-  # Build job
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+jobs: 
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "14"
-          
+          node-version: "18"
       - name: Install dependencies
         run: npm i --force
-
-      - name: Prepare Build
-        run: node ./.github/workflows/prebuild.js
-        
-      - name: Build project
-        run: CI=false && npm run build
-        
+      - name: Build React app
+        run: CI=false node ./.github/workflows/builddathingy.js
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./build
-          
-  # Deployment job
+          path: ./.build
+
   deploy:
     environment:
       name: github-pages
