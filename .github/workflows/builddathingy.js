@@ -43,7 +43,7 @@ function main() {
     const prPreviewDir = path.join(".build", "preview");
 
     // Checkout the main branch and build it
-    buildProject('main', buildDir);
+    buildProject('origin/main', buildDir);
     buildPreview()
 
     // Get all open PRs
