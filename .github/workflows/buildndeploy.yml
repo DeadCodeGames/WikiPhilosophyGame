@@ -8,6 +8,7 @@ permissions:
 on:
   push:
     branches: main
+
   pull_request:
     branches: main
     types:
@@ -15,6 +16,14 @@ on:
       - reopened
       - synchronize
       - closed
+  pull_request_target:
+    branches: main
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
   workflow_dispatch:
 
 jobs: 
