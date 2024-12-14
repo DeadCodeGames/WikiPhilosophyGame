@@ -30,6 +30,8 @@ jobs:
         run: npm i --force
       - name: Build React app
         run: CI=false node ./.github/workflows/builddathingy.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
