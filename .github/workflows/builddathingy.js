@@ -12,7 +12,7 @@ function execCommand(command) {
 function buildProject(branch, outputDir, prNumber = null) {
     console.log(`Building branch: ${branch}`);
     fs.cpSync(path.join(".github"), path.join(".build", "temp", ".github"), { recursive: true });
-    execCommand(`git checkout --force ${branch}`);
+    execCommand(`git checkout ${branch} --force`);
     execCommand('git pull --recurse-submodules')
     const lastCommitSHA = execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim();
     fs.cpSync(path.join(".build", "temp", ".github"), path.join(".github"), { recursive: true });
@@ -43,7 +43,7 @@ function main() {
     const prPreviewDir = path.join(".build", "preview");
 
     // Checkout the main branch and build it
-    buildProject('origin/main', buildDir);
+    buildProject('main', buildDir);
     buildPreview()
 
     // Get all open PRs
