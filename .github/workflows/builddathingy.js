@@ -31,6 +31,8 @@ function buildProject(branch, outputDir, multipleSources, prNumber = null) {
 }
 
 function buildPreview(prs) {
+    let preview = fs.readFileSync(path.join(".github", "workflows", "preview.tsx"));
+    fs.writeFileSync(path.join(".github", "workflows", "preview.tsx"), preview.replace("<App />", `<App PRs={${prs}}`));
     fs.cpSync(path.join(".github", "workflows", "preview.tsx"), path.join("src", "app", "page.tsx"));
     execCommand('npm run build');
     
@@ -50,9 +52,6 @@ function main() {
     // Checkout the main branch and build it
     execCommand('git fetch');
     buildProject('main', buildDir, multipleSources);
-    if (multipleSources) {
-        buildPreview(prs)
-    }
 
     // Build each PR branch
     prs.forEach(pr => {
@@ -60,8 +59,17 @@ function main() {
         const prNumber = pr.number;
         const outputDir = path.join(prPreviewDir, `pr-${prNumber}`);
 
-        buildProject(prBranch, outputDir, multipleSources, prNumber);
+        try {
+            buildProject(prBranch, outputDir, multipleSources, prNumber);
+        } catch (e) {
+            console.error(`Failed to build branch ${prBranch}: ${e}`);
+            prs[prs.indexOf(pr)].failed = true;
+        }
     });
+
+    if (multipleSources) {
+        buildPreview(prs)
+    }
 
     console.log('All builds completed.');
     fs.rmdirSync(path.join(".build", "temp"), { recursive: true });
