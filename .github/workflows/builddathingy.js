@@ -32,7 +32,7 @@ function buildProject(branch, outputDir, multipleSources, prNumber = null) {
 
 function buildPreview(prs) {
     let index = fs.readFileSync(path.join("src", "index.tsx"), { encoding: 'utf-8' });
-    fs.writeFileSync(path.join("src", "index.tsx"), index.replace("<App />", `<App PRs={${prs}}`));
+    fs.writeFileSync(path.join("src", "index.tsx"), index.replace("<App />", `<App PRs={${JSON.stringify(prs)}} />`));
     fs.cpSync(path.join(".github", "workflows", "preview.tsx"), path.join("src", "app", "page.tsx"));
     execCommand('npm run build');
     
