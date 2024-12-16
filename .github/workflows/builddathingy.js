@@ -48,7 +48,7 @@ function main() {
 
     // Get all open PRs
     const prList = execSync('gh pr list --state open --json number,headRefName,commits', { encoding: 'utf-8' });
-    const prs = JSON.parse(prList).sort((a,b)=>return a.number-b.number);
+    const prs = JSON.parse(prList).sort((a,b)=>a.number-b.number);
     const multipleSources = prs.length > 0;
 
     // Checkout the main branch and build it
